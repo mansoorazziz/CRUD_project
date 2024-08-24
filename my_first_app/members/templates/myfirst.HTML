@@ -1,0 +1,59 @@
+<!-- {% extends "master.html" %}
+
+{% block title %}
+  My Tennis Club - List of all members
+{% endblock %}
+
+
+{% block content %}-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<h2>Members Details</h2>
+
+<p><a href="/">HOME</a></p>
+  <h1>Members</h1>
+  
+  <ul>
+    <table>
+      <tr>
+        
+        <th>Name</th>
+        <th>Cell Number</th>
+        <th>Joined Date</th>
+      </tr>
+       {% for x in mymembers %}
+        <tr>
+          <td>{{ x.firstname }} {{ x.lastname }}</td>
+          <td>{{x.phone}}</td>
+          <td>{{x.joined_date}}</td>
+        </tr>
+      <!-- <li><a href="details/{{ x.id }}">{{ x.firstname }} {{ x.lastname }}</a></li> -->
+
+
+       {% endfor %}
+    </table>
+   
+  </ul>
+{% endblock %}

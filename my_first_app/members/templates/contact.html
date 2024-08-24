@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Contact Form</h2>
+{{n}}
+<form action="{% url 'contact_u' %}" method="post" id = "contact">
+
+  {% csrf_token %}
+
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname" value=""><br>
+
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" name="lname" value=""><br>
+
+   <label for="fone">Phone #:</label><br>
+  <input type="number" id="cell" name="fone" value=""><br>
+
+  <label for="day">Joined date:</label><br>
+  <input type="date" id="day" name="jday">
+  <br> <br>
+
+  <input type="submit" value="Submit">
+  <br>
+</form> 
+
+</body>
+</html>
+
