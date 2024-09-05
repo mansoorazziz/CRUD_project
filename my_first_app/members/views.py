@@ -1,15 +1,29 @@
 from django.http import HttpResponse
 from django.template import loader
 from members.models import Member
-from django.shortcuts import render
+from django.shortcuts import render, redirect, HttpResponse
+from django.contrib import messages
+from django.contrib.auth import login, authenticate, logout
+from .forms import LoginForm, RegisterForm
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='% login %')
 def members(request):
+  #if 'session_name' in request.session:
+   # del request.session['session_name']
+    # return render(request,'main.html')
+
   mymembers = Member.objects.all().values()
   template = loader.get_template('myfirst.html')
   context = {
     'mymembers': mymembers,
   }
+
   return HttpResponse(template.render(context, request))
+  #else:
+   # main(request)
+    #return render(request,'main.html')
+
 
 def details(request, id):
   mymember = Member.objects.get(id=id)
@@ -20,8 +34,10 @@ def details(request, id):
   return HttpResponse(template.render(context, request))
 
 def main(request):
-  template = loader.get_template('main.html')
-  return HttpResponse(template.render())
+  #request.session['session_name'] = 'allowed'
+  return render(request,'main.html')
+  # template = loader.get_template('main.html')
+  # return HttpResponse(template.render(request))
 
 def testing(request):
   template = loader.get_template('template.html')
@@ -44,3 +60,14 @@ def save_item(request):
 
 def new_form(request):
   return render (request,'contact_form.html')
+
+def sign_up(request):
+    if request.method == 'GET':
+        form = RegisterForm()
+        return render(request, 'register.html', { 'form': form})
+
+def sign_in(request):
+  return render (request,'main.html')
+
+def sign_out(request):
+  return render (request,'main.html')
